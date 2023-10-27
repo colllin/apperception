@@ -8,6 +8,8 @@ import SolveTemplates
 misc_templates :: [(String, (String, Template, String))]
 misc_templates = [
     ("predict_1.lp", ("data/misc", template_misc_1_1, "predict_1.lp")),
+    ("predict_1b.lp", ("data/misc", template_misc_1_1, "predict_1b.lp")),
+    -- ("hypergraph_1.lp", ("data/misc", template_hypergraph_1, "hypergraph_1.lp")),
     ("predict_2.lp", ("data/misc", template_misc_2_1, "predict_2.lp")),
     ("predict_3.lp", ("data/misc", template_misc_3_1, "predict_3.lp")),
     ("predict_4.lp", ("data/misc", template_misc_4_1, "predict_4.lp")),
@@ -23,6 +25,73 @@ misc_templates = [
     ("second_last_1.lp", ("data/misc", template_second_last_1, "second_last_1.lp")),
     ("second_last_2.lp", ("data/misc", template_second_last_2, "second_last_2.lp"))
     ]
+
+frame_hypergraph_1 :: Frame
+frame_hypergraph_1 = Frame {
+    types = [T "object"],
+    type_hierarchy = [],
+    objects = [
+        (O "sensor_0_0", T "object"),
+        (O "sensor_1_0", T "object"),
+        (O "sensor_2_0", T "object"),
+        (O "goal_0", T "object"),
+        (O "risk_0", T "object"),
+        (O "motor_0_0", T "object"),
+        ],
+    exogeneous_objects = [],
+    permanent_concepts = [
+        (P "r1", Constructed, [T "object", T "object"]),
+        (P "r2", Constructed, [T "object", T "object"]),
+        (P "r3", Constructed, [T "object", T "object"]),
+        -- (P "r4", Constructed, [T "object", T "object"]),
+        -- (P "r5", Constructed, [T "object", T "object"])
+        ],
+    fluid_concepts = [
+        (C "on", [T "object"]), 
+        (C "off", [T "object"]),
+        (C "p1", [T "object"]),
+        (C "p2", [T "object"]),
+        (C "p3", [T "object"]),
+        (C "p4", [T "object"]),
+        (C "p5", [T "object"]),
+        -- (C "p6", [T "object"]),
+        -- (C "p7", [T "object"]),
+        -- (C "p8", [T "object"]),
+        -- (C "p9", [T "object"]),
+        -- (C "p10", [T "object"]),
+        -- (C "p11", [T "object"]),
+        -- (C "p12", [T "object"]),
+        -- (C "p13", [T "object"]),
+        -- (C "p14", [T "object"]),
+        -- (C "p15", [T "object"]),
+        -- (C "p16", [T "object"]),
+        -- (C "p17", [T "object"]),
+        -- (C "p18", [T "object"]),
+        -- (C "p19", [T "object"]),
+        -- (C "p20", [T "object"])
+        ],
+    input_concepts = [C "on", C "off"],
+    static_concepts = [],
+    vars = [
+        (V "x", T "object")
+        ],
+    var_groups = [
+        [V "x"]
+        ],
+    aux_files = []
+}
+
+make_hypergraph_template :: Int -> Int -> Int -> Template
+make_hypergraph_template max_atoms max_static_rules max_causal_rules = Template {
+    dir = "misc",
+    frame = frame_hypergraph_1,
+    min_body_atoms = 1,
+    max_body_atoms = max_atoms, 
+    num_arrow_rules = max_static_rules,
+    num_causes_rules = max_causal_rules,
+    num_visual_predicates = Nothing,
+    use_noise = False
+    }    
 
 frame_misc_1_1 :: Frame    
 frame_misc_1_1 = Frame {

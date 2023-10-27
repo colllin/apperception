@@ -1,3 +1,15 @@
+%--------
+% Update rules from Interpretation.hs
+%--------
+% 1 { rule_var_group(R, VG) : is_var_group(VG) } 1 :- is_gen_rule(R), use_rule(R).
+% min_bs { rule_body(R, VA) : is_var_atom(VA) } max_bs :- is_gen_rule(R), use_rule(R).
+% 1 { rule_head_causes(R, VA) : cause_head(VA) } 1 :- is_causes_rule(R), use_rule(R).
+% 1 { rule_arrow_head(R, VA) : is_var_fluent(VA) } 1 :- is_arrow_rule(R), use_rule(R).
+% { use_rule(R) } :- is_arrow_rule(R).
+% { use_rule(R) } :- is_causes_rule(R).
+%--------
+
+
 %------------------------------------------------------------------------------
 % eval
 %------------------------------------------------------------------------------

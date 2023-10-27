@@ -37,6 +37,8 @@ main = do
         ["music", f] -> solve_music_iteratively f 
         ["rhythm", f] -> solve_rhythm_iteratively f 
         ["misc", f] -> solve_misc f
+        ["hypergraph", f] -> putStrLn $ "Usage: solve hypergraph <file> <n1> <n2> <n3>"
+        ["hypergraph", f, n1, n2, n3] -> solve_hypergraph f (read n1) (read n2) (read n3)
         ["occlusion", f] -> solve_occlusion f
         ["walker", t, f] -> solve_walker t f
         ["binding", f] -> solve_binding f
@@ -63,6 +65,31 @@ solve_misc f = case lookup f misc_templates of
 
 process_misc :: String -> Template -> String -> IO ()
 process_misc dir t input_f = do
+    (results_f, ls2) <- do_solve dir input_f t
+    case ls2 of
+        [] -> do
+            putStrLn "No solution found."
+        _ -> do
+            let ans = last_answers ls2
+            Monad.forM_ ans (write_latex t)
+            let ls3 = map (process_answer_with_template t) ans
+            Monad.forM_ ls3 putStrLn
+
+-------------------------------------------------------------------------------
+-- Hypergraph-specific solving
+-------------------------------------------------------------------------------
+
+-- solve_eca_iteratively :: String -> IO ()
+-- solve_eca_iteratively input_f = solve_iteratively "data/eca" input_f (all_eca_templates input_f) False False
+    
+-- all_eca_templates :: String -> [(String, Template)]
+-- all_eca_templates input_f = map (make_eca_template False input_f) [0..8]
+
+solve_hypergraph :: String -> Int -> Int -> Int -> IO ()
+solve_hypergraph input_f n1 n2 n3 = process_hypergraph "data/misc" (make_hypergraph_template n1 n2 n3) input_f
+
+process_hypergraph :: String -> Template -> String -> IO ()
+process_hypergraph dir t input_f = do
     (results_f, ls2) <- do_solve dir input_f t
     case ls2 of
         [] -> do
