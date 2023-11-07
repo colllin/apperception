@@ -1,0 +1,32 @@
+ignore-project: False
+
+source-repository-package
+  type: git
+  location: https://github.com/spell-music/csound-expression
+  tag: 345df2c91c9831dd895f58951990165598504814
+  subdir: csound-expression-dynamic
+
+source-repository-package
+  type: git
+  location: https://github.com/spell-music/csound-expression
+  tag: 345df2c91c9831dd895f58951990165598504814
+  subdir: csound-expression-typed
+
+source-repository-package
+  type: git
+  location: https://github.com/spell-music/csound-expression
+  tag: 345df2c91c9831dd895f58951990165598504814
+  subdir: csound-expression-opcodes
+
+source-repository-package
+  type: git
+  location: https://github.com/spell-music/csound-expression
+  tag: 345df2c91c9831dd895f58951990165598504814
+  subdir: csound-expression
+
+source-repository-package
+  type: git
+  location: https://github.com/spell-music/csound-expression
+  tag: 345df2c91c9831dd895f58951990165598504814
+  subdir: csound-sampler
+
